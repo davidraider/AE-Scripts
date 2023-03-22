@@ -3,7 +3,7 @@
 // by David christopher
 //21/03/2023
 
-var mainWindow = new Window("palette", "Sage Flight Check", undefined);
+var mainWindow = new Window("palette", "JPEG Exporter", undefined);
 mainWindow.orientation = "column";
 
 var groupOne = mainWindow.add("panel", undefined, "Search Keyword");
@@ -11,7 +11,7 @@ groupOne.orientation = "Column";
 groupOne.alignment = "center";
 
 groupOne.add("statictext", undefined, "Keyword for Search");
-var keyWord = groupOne.add("edittext", undefined, "SAGE");
+var keyWord = groupOne.add("edittext", undefined, " Type the Keyword");
 keyWord.size = [250, 25];
 
 groupOne.add("statictext", undefined, "Select the Output Folder");
