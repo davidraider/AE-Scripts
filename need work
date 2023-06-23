@@ -1,0 +1,71 @@
+#By David christopher
+import tkinter,customtkinter
+from tkinter import filedialog
+from tkinter import *
+from tkinter import messagebox
+import subprocess
+
+# system settings
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("blue")
+
+# app frame
+
+app = customtkinter.CTk()
+app.geometry("640x360")
+app.title("Video_Compressor")
+
+# UI Elements
+title = customtkinter.CTkLabel(app,text="Select Video Path")
+title.pack(padx=10,pady=10)
+
+path_url = tkinter.StringVar()
+path = customtkinter.CTkEntry(app,width=350,height=35,textvariable=path_url)
+path.pack()
+
+def render():							
+								
+    # Input video file								
+    input_file = path.get()							
+                                    
+    # Define output resolutions								
+    resolutions = [(1920, 1080)]								
+                                    
+    # Desired CRF value (lower value = higher quality)								
+    crf = float(numdata.get())								
+                                    
+    # Iterate over resolutions and run FFmpeg command								
+    for width, height in resolutions:								
+        output_file = "output_{}x{}.mp4".format(width, height)								
+        subprocess.run(["ffmpeg", "-i", input_file, "-vf", "scale={}:{}".format(width, height), "-crf", str(crf), output_file])
+        subprocess.call(input_file)
+
+
+def open():
+    app.filename = filedialog.askopenfilename(initialdir="/~Desktop/",title="Select a File",)
+    path_url.set(app.filename)
+    messagebox.showinfo(message=path.get())
+
+numberT = customtkinter.CTkLabel(app,text="Quality Number (lower value = higher quality) >> 0 to 100")
+numberT.pack(padx=10,pady=10)
+
+num_url = tkinter.StringVar()
+numdata = customtkinter.CTkEntry(app,width=75,height=35,textvariable=num_url)
+numdata.pack()
+
+converter = customtkinter.CTkButton(app, text="Open",command=open)
+converter.pack(padx=10,pady=10)
+
+
+
+
+#covert button
+
+
+
+
+convert = customtkinter.CTkButton(app, text="Convert",command= render)
+convert.pack(padx=10,pady=10)
+
+
+app.mainloop()
